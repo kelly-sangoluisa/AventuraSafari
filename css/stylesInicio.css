@@ -1,0 +1,55 @@
+
+.card-explore,
+.card-play {
+    position: absolute;
+    width: 35%;
+    height: 50%;
+    text-align: center;
+    background-color: #0b0a0ab5;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+}
+
+.card-explore {
+    top: 33%;
+    left: 10%;
+}
+
+.card-play {
+    top: 33%;
+    right: 10%;
+}
+
+.card-explore video{
+    width: 80%;
+    height: 80%;
+}
+
+.card-play i{
+    font-size: 200px;
+    padding-top: 5%;
+    color: white;
+}
+
+.text-wrapper-3,
+.text-wrapper-2 {
+    font-family: "Bebas Neue-Regular", Helvetica;
+    font-weight: bolder;
+    font-size: 29px;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+}
+.play-icon {
+    animation: zoomInOut 3s infinite;
+}
+
+@keyframes zoomInOut {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
