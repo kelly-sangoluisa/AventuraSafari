@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Educativo - Tutorial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/stylesNF.css">
+</head>
+
+<body>
+<div class="game-container">
+    <!-- Fondo -->
+    <div class="background"></div>
+
+    <!-- Barra de Progreso -->
+    <div class="progress-bar">
+        <div class="progress" style="width: 25%;"></div>
+    </div>
+
+    <!-- Contenido del Juego -->
+    <div class="game-content">
+        <!-- Configuración -->
+        <div class="card-logo">
+            <div class="rectangle-superior"></div>
+
+            <h2 id="title">Nivel Fácil</h2>
+
+            <div class="rectangle-inferior"></div>
+        </div>
+
+        <header class="text-center">
+            <h2 id="tutorial-title">Tutorial: Aprende a Jugar</h2>
+        </header>
+
+        <!-- Temporizador -->
+        <div class="timer text-center">
+            <span id="timer">00:00</span>
+        </div>
+
+        <!-- Pregunta -->
+        <div class="question-container text-center">
+            <header class="text-center">
+                <h2 id="preguntas-title">Pregunta 1</h2>
+                <p id="preguntas-description">¿Cuál de las siguientes opciones es un animal vertebrado?</p>
+            </header>
+        </div>
+
+        <!-- Opciones -->
+        <div class="options-container text-center" id="options-container">
+            <!-- Las opciones serán insertadas dinámicamente aquí -->
+        </div>
+
+        <!-- Respuesta -->
+        <div class="answer-container text-center" id="dropzone">
+            <div class="answer-dropzone">Arrastra la respuesta aquí</div>
+        </div>
+
+        <!-- Botones -->
+        <div class="buttons-container text-center">
+            <button class="btn btn-warning" id="skip-preguntas">Saltar Preguntas</button>
+            <button class="btn btn-success" id="next-step">Siguiente Paso</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/scriptNF.js"></script>
+<script src="js/scriptPreguntasNF.js"></script>
+</body>
+
+</html>
+
+
