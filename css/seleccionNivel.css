@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Moirai+One&display=swap');
+
+html,
+body {
+    margin: 0px;
+    height: 100%;
+}
+
+body {
+    background-image: url(../images/safari\ fondo\ 2.jpg);
+    background-size: 100% 100%;
+}
+
+.fondo-difuminado {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    top: 3%;
+    left: 3%;
+    right: 3%;
+    bottom: 3%;
+    background-color: #000000ab;
+    box-shadow: 0px 4px 7px 7px #0000007a;
+}
+
+.group-config {
+    position: absolute;
+    top: 4%;
+    right: 3%;
+    display: flex;
+    gap: 20px;
+}
+
+.group-config i{
+    color: white;
+    font-size: 30px;
+}
+
+.card-logo {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    right: 10%;
+    text-align: center;
+    background-color: #0b0a0ab5;
+    font-family: Arial, sans-serif;
+}
+
+
+
+.rectangle-superior,
+.rectangle-inferior {
+    height: 9px;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid #ffffff;
+    box-shadow: -2px 1px 4px #d66c0986;
+    margin: 10px auto;
+}
+
+.card-niveles {
+  
+  position: absolute;
+  width: 80%;
+  height: 40%;
+  background-color: #0b0a0ab5;
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+    
+}
+
+label[for="player-name"] {
+  color: white; /* Color del texto de la etiqueta en blanco */
+  font-family: 'Arial', sans-serif; /* Fuente tipo Arial */
+  font-size: 18px; /* Tamaño de fuente */
+  font-weight: bold; /* Negrita */
+  text-align: center; /* Alinear el texto al centro */
+  margin-bottom: 8px; /* Espacio inferior */
+}
+
+input#player-name {
+    background-color: rgba(234, 222, 222, 0.307); /* Fondo con color blanco difuso */
+    color: white; /* Texto dentro del cuadro en blanco */
+    padding: 10px; /* Relleno interno */
+    font-size: 14px; /* Tamaño de la fuente */
+    border-radius: 5px; /* Bordes redondeados */
+    width: 100%; /* El input ocupa todo el ancho del contenedor */
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+}
+
+/* Estilo para el borde del input cuando se enfoque */
+input#player-name:focus {
+    border-color: #af4c57; /* Color de borde cuando el input es seleccionado */
+    outline: none; /* Elimina el borde por defecto */
+}
+.card-niveles h2 {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  color: #ffffff;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.card-niveles {
+ top:42%;
+  right: 10%;
+}
+.card-logo h1 {
+  font-family: "Bebas Neue-Regular", Helvetica;
+  font-size: 28px;
+  text-shadow: -6px 1px 18px #d69809;
+  -webkit-text-fill-color: rgb(194, 150, 21);
+  -webkit-text-stroke: 1px rgb(255, 255, 255);
+}
+button {
+  background-color: #e0e0e0; /* Color de fondo por defecto */
+  color: white;
+  font-size: 18px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Estilos específicos para el botón "Fácil" */
+button#easy {
+  background-color: #4caf50;
+}
+
+/* Estilos específicos para el botón "Normal" */
+button#normal {
+  background-color: #ffc107;
+}
+
+/* Estilos específicos para el botón "Difícil" */
+button#hard {
+  background-color: #f44336;
+}
+
+/* Efecto hover para los botones */
+button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+color: #020202;
+}
+
+/* Efecto de active cuando se presiona el botón */
+
+
+/* Clase que se aplicará cuando el botón esté seleccionado */
+button.selected {
+  border: 3px solid #fff; /* Borde blanco para resaltar */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Aumenta la sombra cuando se selecciona */
+  background-color: #333; /* Fondo oscuro cuando se selecciona */
+}
+
+#start-game {
+  background-color: #0066cc;
+  margin-top: 40px;
+}
+
+#start-game:hover {
+  transform: scale(1.2);
+}
+
+input#player-name {
+  width: 20%;
+  padding: 8px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+}
+
+#start-game {
+  display: block;
+  margin: 10px auto; /* Centra el botón y agrega un margen superior e inferior */
+  margin-top: 20px;
+  height: 50px;
+  width: 100px;
+}
+.text-wrapper-3,
+.text-wrapper-2 {
+    font-family: "Bebas Neue-Regular", Helvetica;
+    font-weight: bolder;
+    font-size: 29px;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.grupo-redes {
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 40px;
+}
+
+.grupo-redes a {
+    color: white;
+    font-size: 30px;
+}
+
+
