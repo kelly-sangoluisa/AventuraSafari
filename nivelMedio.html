@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Aventura Safari</title>
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/stylesNM.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -20,9 +20,20 @@
     </div>
     <div class="card-logo">
         <div class="rectangle-superior"></div>
-        <div class="title">Aventura Animal: El Desafío de los Reinos</div>
+        <div class="title">Escoje los animales invertebrados</div>
         <div class="rectangle-inferior"></div>
     </div>
-    
+    <div class="game-container">
+        <table role="grid" aria-label="Animal Selection">
+            <tbody id="game-board">
+                <!-- Table cells will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+    <div class="button-container">
+        <button id="validate-button">Comprobar</button>
+        <button id="reset-button">Nuevo</button>
+    </div>
+    <script src="js/scriptNM.js"></script>
 </body>
 </html>

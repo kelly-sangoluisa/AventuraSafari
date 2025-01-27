@@ -1,0 +1,80 @@
+/* Tablero del juego */
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    position: absolute;
+    top: 25.5%;
+    left: 17%;
+}
+.card-logo .title {
+    font-family: "Bebas Neue-Regular", Helvetica;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+
+
+/* Celdas de la tabla */
+img,td {
+    width: 120px;
+    height: 120px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #cccccc00;
+    position: relative;
+    padding: 1px;
+}
+
+
+/* Indica que una celda está seleccionada */
+td.selected {
+    border: 3px solid #ff7b00;
+}
+
+/* Indica que una selección es correcta */
+td.correct {
+    border: 3px solid rgb(89, 241, 89);
+    filter: brightness(0.5) sepia(1) hue-rotate(90deg) saturate(5);
+    transition: filter 0.3s ease;
+}
+
+/* Indica que una selección es incorrecta */
+td.incorrect {
+    border: 3px solid rgb(226, 7, 7);
+    filter: brightness(0.5) sepia(1) hue-rotate(-50deg) saturate(5); 
+    transition: filter 0.3s ease;
+}
+
+
+/* Botón contenedor */
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+    position: absolute;
+    bottom: 4%;
+    left: 35%;
+}
+
+/* Estilos para los botones */
+button {
+    background-color: #d66b09;
+    width: 200px;
+    color: #000;
+    box-shadow: 2px 2px 4px #00000066;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #123d24;
+    color: #fff;
+}
+
+button:active {
+    background-color: #003d80;
+}
