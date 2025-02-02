@@ -1,120 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aventura Safari</title>
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/stylesNf.css" />
+    <title>Juego Educativo - Tutorial</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/stylesNF.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="fondo-difuminado"></div>
-    <div id="text-container" class="text-container">
-        <div id="welcome-text" class="welcome-text"></div>
-        <div id="level-text" class="level-text"></div>
-    </div>
-    <div class="group-config">
-        
-        <div id="vidas">
-            <p id="vidas-remaining">Vidas ❤️: 3</p>
-        </div>
-        <div id="temporizador-container">
-           
-            <span id="temporizador-icon">⏳</span>
-            <span id="temporizador">5:00</span>
-          </div>
-        <a href="" target="_blank">
-            <i class="fa-solid fa-volume-up" aria-hidden="true"></i>
-        </a>
-        <a href="" target="_blank">
-            <i class="fa-solid fa-cog" aria-hidden="true"></i>
-        </a>
-    </div>
-
-    <!-- Overlay de Game Over -->
-<div id="game-over-overlay" style="display: none;">
-    <div id="game-over">
-        <h1>¡Juego Terminado!</h1>
-        <p id="score-result">Puntaje: </p>
-        <p id="vidas-result">Vidas Restantes: </p>
-        <p id="incorrectos-result">Respuestas Incorrectas: </p>
-        <button onclick="window.location.href='nivelMedio.html'">Volver a jugar</button>
-    </div>
-</div>
-<!-- Overlay de Tutorial -->
-
-<!--
-<div id="tutorial-overlay">
-    <div id="tutorial">
-        <h2>Instrucciones de Juego</h2>
-        <p>Selecciona los animales Invertebrados</p>
-        <p>Observa el ejemplo Ejemplo</p>
-        <div id="animal-container">
-            <div class="animal" id="animal">🐶 Perro</div>
-            <div class="species" id="species">🐾 Mamífero</div>
-        </div>
-        <div id="pointer">👆</div>
-        <button id="close-instructions">Cerrar</button>
-        <i class="fas fa-times" id="close-icon" aria-hidden="true" style="cursor: pointer; font-size: 24px; position: absolute; top: 10px; right: 10px;"></i> <!-- Ícono para cerrar -->
-    </div>
-</div>
-</div>
-    <div class="card-logo">
-        <div class="rectangle-superior"></div>
-        <div class="title">Escoje los animales invertebrados</div>
-        <div class="rectangle-inferior"></div>
-    </div>
-        
 <div class="game-container">
+    <!-- Fondo -->
+    <div class="background"></div>
 
-    <div class="progress-container">
-        <div id="progress-bar"></div>
-    </div>
+    <!-- Contenido del Juego -->
+    <div class="game-content">
+        <!-- Nombre y Nivel -->
+        <div id="text-container" class="text-container">
+            <div id="welcome-text" class="welcome-text">Bienvenido, <span id="player-name">Nombre del Jugador</span></div>
+            <div id="level-text" class="level-text">Nivel: <span id="current-level">Fácil</span></div>
+        </div>
 
-    <div class="question-container text-center">
-        <h3>Pregunta 1:</h3>
-        <p>Los animales que tienen columna vertebral son llamados:</p>
-      </div>
-  
-      <!-- Opciones -->
-      <div class="options-container text-center">
-        <div class="option" id="option1" draggable="true">Vertebrados</div>
-        <div class="option" id="option2" draggable="true">Invertebrados</div>
-        <div class="option" id="option3" draggable="true">Mamíferos</div>
-        <div class="option" id="option4" draggable="true">Peces</div>
-      </div>
-    <!-- Opciones -->
-    <div class="options-container text-center" id="options-container">
-        <!-- Las opciones serán insertadas dinámicamente aquí -->
-    </div>
+        <!-- Barra de Progreso -->
+        <div class="progress-bar">
+            <div class="progress" style="width: 25%;"></div>
+        </div>
 
-    <!-- Respuesta -->
-    <div class="answer-container text-center" id="dropzone">
-        <div class="answer-dropzone">Arrastra la respuesta aquí</div>
-    </div>
+        <!-- Configuración -->
+        <div class="group-config">
+            <div id="vidas">
+                <p id="vidas-remaining">Vidas ❤️: 3</p>
+            </div>
+            <div id="temporizador-container">
+                <span id="temporizador-icon">⏳</span>
+                <span id="temporizador">5:00</span> <!-- Este es el ID que usaremos en el JavaScript -->
+            </div>
+            <a href="" target="_blank">
+                <i class="fa-solid fa-volume-up" aria-hidden="true"></i>
+            </a>
+            <a href="" target="_blankss">
+                <i class="fa-solid fa-cog" aria-hidden="true"></i>
+            </a>
+        </div>
 
-    <!-- Botones -->
-    <div class="buttons-container text-center">
-        <button id="next-button" onclick="window.location.href='seleccionNivel.html'">Anterior</button>
-        <button class="btn btn-warning" id="skip-preguntas">Saltar Preguntas</button>
-        <button class="btn btn-success" id="next-step">Siguiente Paso</button>
-        <button id="next-button" onclick="window.location.href='nivelMedio.html'">Siguiente Nivel</button>
+        <div class="card-logo">
+            <div class="rectangle-superior"></div>
+                <div class="question-container text-center">
+                    <header class="text-center">
+                        <h2 id="preguntas-title">Pregunta 1</h2>
+                    </header>
+                </div>
+            <div class="rectangle-inferior"></div>
+
+        </div>
+
+        <!-- Pregunta -->
+        <div class="question-container text-center">
+            <header class="text-center">
+                <h2 id="preguntas-description">¿Cuál de las siguientes opciones es un animal vertebrado?</h2>
+            </header>
+        </div>
+
+        <!-- Opciones -->
+        <div class="options-container text-center" id="options-container">
+            <!-- Las opciones serán insertadas dinámicamente aquí -->
+        </div>
+        <!-- Respuesta -->
+        <div class="answer-container text-center" id="dropzone">
+            <div class="answer-dropzone">Arrastra la respuesta aquí</div>
+        </div>
+        <!-- Botones -->
+        <div class="buttons-container text-center">
+            <button class="btn btn-warning" id="skip-preguntas">Saltar Preguntas</button>
+            <button class="btn btn-success" id="next-step">Siguiente Paso</button>
+        </div>
     </div>
 </div>
 
+<!-- Modal de Bootstrap para mostrar estadísticas -->
+<div class="modal fade" id="estadisticasModal" tabindex="-1" aria-labelledby="estadisticasModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="estadisticasModalLabel">Estadísticas del Juego</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Respuestas Correctas: <span id="correct-answers">0</span></p>
+                <p>Respuestas Incorrectas: <span id="incorrect-answers">0</span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 </div>
-       
-    </div>
 
-    <div class="puntaje">
-
-        <p id="feedback"></p>
-        <p id="score">Puntaje: 0</p>
-    </div>
-
-    <script src="js/scriptNF.js"></script>
-    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/scriptNF.js"></script>
+<script src="js/scriptPreguntasNF.js"></script>
+<script src="js/scriptEstadisticas.js"></script> <!-- Nuevo script para manejar estadísticas -->
 </body>
 </html>

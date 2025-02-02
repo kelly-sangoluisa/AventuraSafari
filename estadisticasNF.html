@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estadísticas del Juego</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/stylesNF.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h1>Estadísticas del Juego</h1>
+  <div id="estadisticas">
+    <p>Respuestas Correctas: <span id="correct-answers">0</span></p>
+    <p>Respuestas Incorrectas: <span id="incorrect-answers">0</span></p>
+  </div>
+  <a href="index.html" class="btn btn-primary">Volver al Juego</a>
+</div>
+
+<script>
+  // Obtener las estadísticas del localStorage
+  const correctAnswers = localStorage.getItem("correctAnswers") || 0;
+  const incorrectAnswers = localStorage.getItem("incorrectAnswers") || 0;
+
+  // Mostrar las estadísticas en la página
+  document.getElementById("correct-answers").textContent = correctAnswers;
+  document.getElementById("incorrect-answers").textContent = incorrectAnswers;
+</script>
+</body>
+</html>

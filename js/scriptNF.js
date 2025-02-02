@@ -39,8 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
-//////Nombre de  jugadore y nivel /
+// Nombre del jugador y nivel
 document.addEventListener('DOMContentLoaded', () => {
     const playerName = localStorage.getItem('playerName');
     const selectedLevel = localStorage.getItem('selectedLevel');
