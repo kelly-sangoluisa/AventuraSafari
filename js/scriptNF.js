@@ -38,3 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+
+//////Nombre de  jugadore y nivel /
+document.addEventListener('DOMContentLoaded', () => {
+    const playerName = localStorage.getItem('playerName');
+    const selectedLevel = localStorage.getItem('selectedLevel');
+
+    if (playerName && selectedLevel) {
+        // Mostrar el nombre y nivel
+        document.getElementById('welcome-text').textContent = `Bienvenido, ${playerName}!`;
+        document.getElementById('level-text').textContent = `Nivel: ${selectedLevel}`;
+    } else {
+        // Si no se encuentran los datos, redirigir al inicio
+        alert("Datos no válidos. Por favor, comienza de nuevo.");
+        window.location.href = 'index.html';
+    }
+});
