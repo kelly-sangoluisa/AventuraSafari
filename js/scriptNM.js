@@ -2,9 +2,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameBoard = document.getElementById("game-board");
     const validateButton = document.getElementById("validate-button");
     const resetButton = document.getElementById("reset-button");
+    const feedbackElement = document.getElementById("feedback");
+    const progressBar = document.getElementById("progress-bar");
+    const vidasRemainingElement = document.getElementById("vidas-remaining");
+    const scoreElement = document.getElementById("score");
+    const temporizadorElemento = document.getElementById('temporizador');
+
+    let score = 0;
+    let vidas = 3;
+    let tiempoRestante = 300; // 5 minutos
+    let timer = null;
+    let juegoIniciado = false;
 
     // Lista de animales con sus tipos
-        const animals = [
+    const animals = [
         { name: "Jellyfish", type: "invertebrate", img: "../img/recursos-nivelMedio/jellyfish.jpg" },
         { name: "Dog", type: "vertebrate", img: "../img/recursos-nivelMedio/dog.jpg" },
         { name: "Starfish", type: "invertebrate", img: "../img/recursos-nivelMedio/starfish.jpg" },
@@ -40,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const createCell = (animal) => {
         const cell = document.createElement("td");
         const img = document.createElement("img");
-        img.src = `img/${animal.img}`;
+        img.src = animal.img;
         img.alt = animal.name;
 
         cell.appendChild(img);
@@ -58,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const populateBoard = () => {
         gameBoard.innerHTML = ""; // Limpiar tablero existente
         shuffleArray(animals);
-        const rows = 3;
+        const rows = 2;
         const cols = 7;
         for (let i = 0; i < rows; i++) {
             const row = document.createElement("tr");
@@ -78,8 +89,39 @@ document.addEventListener("DOMContentLoaded", () => {
                 const isCorrect = cell.dataset.type === "invertebrate";
                 cell.classList.remove("selected");
                 cell.classList.add(isCorrect ? "correct" : "incorrect");
+
+                if (isCorrect) {
+                    score += 10;
+                    feedbackElement.textContent = "¡Bien hecho!";
+                } else {
+                    vidas--;
+                    feedbackElement.textContent = "Incorrecto. Pierdes una vida.";
+                    if (vidas <= 0) {
+                        gameOver();
+                    }
+                }
+
+                // Actualizar puntaje y vidas
+                scoreElement.textContent = `Puntaje: ${score}`;
+                vidasRemainingElement.textContent = `Vidas ❤️: ${vidas}`;
+                updateProgressBar();
             }
         });
+    };
+
+    // Actualizar barra de progreso
+    const updateProgressBar = () => {
+        const totalInvertebrates = animals.filter(animal => animal.type === "invertebrate").length;
+        const progress = (score / (totalInvertebrates * 10)) * 100; // Cada respuesta correcta suma 10 puntos
+        progressBar.style.width = `${progress}%`;
+    };
+
+    // Función de Game Over
+    const gameOver = () => {
+        clearInterval(timer);
+        document.getElementById('game-over-overlay').style.display = "flex";
+        document.getElementById('score-result').textContent = "Puntaje: " + score;
+        document.getElementById('vidas-result').textContent = "Vidas Restantes: " + vidas;
     };
 
     // Reiniciar juego
@@ -88,6 +130,36 @@ document.addEventListener("DOMContentLoaded", () => {
         cells.forEach((cell) => {
             cell.classList.remove("selected", "correct", "incorrect");
         });
+        score = 0;
+        vidas = 3;
+        feedbackElement.textContent = "";
+        scoreElement.textContent = "Puntaje: 0";
+        vidasRemainingElement.textContent = "Vidas ❤️: 3";
+        populateBoard();
+        updateProgressBar();
+    };
+
+    // Función para iniciar el temporizador
+    const iniciarTemporizador = () => {
+        if (timer !== null) return;
+
+        temporizadorElemento.innerText = formatoTiempo(tiempoRestante);
+        timer = setInterval(() => {
+            if (tiempoRestante > 0) {
+                tiempoRestante--;
+                temporizadorElemento.innerText = formatoTiempo(tiempoRestante);
+            } else {
+                clearInterval(timer);
+                timer = null;
+                gameOver();
+            }
+        }, 1000);
+    };
+
+    const formatoTiempo = (segundos) => {
+        const minutos = Math.floor(segundos / 60);
+        const segundosRestantes = segundos % 60;
+        return `${minutos.toString().padStart(2, '0')}:${segundosRestantes.toString().padStart(2, '0')}`;
     };
 
     // Eventos de botones
@@ -97,6 +169,38 @@ document.addEventListener("DOMContentLoaded", () => {
         populateBoard(); // Reinicia el tablero
     });
 
+    // Cerrar tutorial y empezar el juego
+    document.getElementById('close-instructions').addEventListener('click', () => {
+        document.getElementById('tutorial-overlay').style.display = 'none';
+        if (!juegoIniciado) {
+            juegoIniciado = true;
+            iniciarTemporizador();
+        }
+    });
+
+    document.getElementById('close-icon').addEventListener('click', () => {
+        document.getElementById('tutorial-overlay').style.display = 'none';
+        if (!juegoIniciado) {
+            juegoIniciado = true;
+            iniciarTemporizador();
+        }
+    });
+
     // Inicializar tablero al cargar la página
     populateBoard();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const playerName = localStorage.getItem('playerName');
+    const selectedLevel = localStorage.getItem('selectedLevel');
+
+    if (playerName && selectedLevel) {
+        // Mostrar el nombre y nivel
+        document.getElementById('welcome-text').textContent = `Bienvenido, ${playerName}!`;
+        document.getElementById('level-text').textContent = `Nivel: ${selectedLevel}`;
+    } else {
+        // Si no se encuentran los datos, redirigir al inicio
+        alert("Datos no válidos. Por favor, comienza de nuevo.");
+        window.location.href = 'index.html';
+    }
 });

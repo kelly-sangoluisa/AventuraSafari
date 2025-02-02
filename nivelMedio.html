@@ -10,7 +10,20 @@
 </head>
 <body>
     <div class="fondo-difuminado"></div>
+    <div id="text-container" class="text-container">
+        <div id="welcome-text" class="welcome-text"></div>
+        <div id="level-text" class="level-text"></div>
+    </div>
     <div class="group-config">
+        
+        <div id="vidas">
+            <p id="vidas-remaining">Vidas ❤️: 3</p>
+        </div>
+        <div id="temporizador-container">
+           
+            <span id="temporizador-icon">⏳</span>
+            <span id="temporizador">5:00</span>
+          </div>
         <a href="" target="_blank">
             <i class="fa-solid fa-volume-up" aria-hidden="true"></i>
         </a>
@@ -18,23 +31,57 @@
             <i class="fa-solid fa-cog" aria-hidden="true"></i>
         </a>
     </div>
+
+    <!-- Overlay de Game Over -->
+<div id="game-over-overlay" style="display: none;">
+    <div id="game-over">
+        <h1>¡Juego Terminado!</h1>
+        <p id="score-result">Puntaje: </p>
+        <p id="vidas-result">Vidas Restantes: </p>
+        <p id="incorrectos-result">Respuestas Incorrectas: </p>
+        <button onclick="window.location.href='nivelMedio.html'">Volver a jugar</button>
+    </div>
+</div>
+<!-- Overlay de Tutorial -->
+<div id="tutorial-overlay">
+    <div id="tutorial">
+        <h2>Instrucciones de Juego</h2>
+        <p>Selecciona los animales Invertebrados</p>
+        <p>Observa el ejemplo Ejemplo</p>
+        <div id="animal-container">
+            <div class="animal" id="animal">🐶 Perro</div>
+            <div class="species" id="species">🐾 Mamífero</div>
+        </div>
+        <div id="pointer">👆</div>
+        <button id="close-instructions">Cerrar</button>
+        <i class="fas fa-times" id="close-icon" aria-hidden="true" style="cursor: pointer; font-size: 24px; position: absolute; top: 10px; right: 10px;"></i> <!-- Ícono para cerrar -->
+    </div>
+</div>
     <div class="card-logo">
         <div class="rectangle-superior"></div>
         <div class="title">Escoje los animales invertebrados</div>
         <div class="rectangle-inferior"></div>
     </div>
     <div class="game-container">
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
         <table role="grid" aria-label="Animal Selection">
             <tbody id="game-board">
-                <!-- Table cells will be populated dynamically -->
+                <!-- Las celdas de la tabla se poblarán dinámicamente -->
             </tbody>
         </table>
     </div>
+
     <div class="button-container">
         <button id="next-button" onclick="window.location.href='nivelFacil.html'">Anterior</button>
         <button id="validate-button">Comprobar</button>
         <button id="reset-button">Nuevo</button>
         <button id="next-button" onclick="window.location.href='nivelDificil.html'">Siguiente</button>
+    </div>
+        <div>
+        <p id="feedback"></p>
+        <p id="score">Puntaje: 0</p>
     </div>
     <script src="js/scriptNM.js"></script>
     
