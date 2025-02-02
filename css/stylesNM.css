@@ -66,13 +66,14 @@ td.incorrect {
 
 /* Botón contenedor */
 .button-container {
-    text-align: center;
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
     margin-top: 20px;
     position: absolute;
     bottom: 4%;
-    left: 35%;
+    left: 0; /* Reiniciar el valor de left */
+    width: 100%; /* Asegurar que el contenedor ocupa todo el ancho */
 }
-
 /* Estilos para los botones */
 button {
     background-color: #d66b09;
@@ -214,21 +215,24 @@ button:active {
    
 }
   #feedback {
-    font-size: 1.2em;
-    margin-top: 155px;
+    margin: 0PX;
+    font-size: 1.1em;
     color: #ddd;
-   
-  
+    padding: 0PX;
   }
   
   #score {
+    margin: 0PX;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #ddd;
+  }
+  .puntaje {
+    margin: 0PX;
+    position: relative;
+    top: 270px; /* Ajusta este valor según lo necesites */
+    text-align: center;
     font-size: 1.2em;
     font-weight: bold;
-    margin-top: 5px;
-    color: #ddd;
-    margin-top: 50PX;
-  }
-  #feedback, #score {
-    margin: 5px; /* Eliminado el margen superior adicional */
-  
-  }
+
+}
