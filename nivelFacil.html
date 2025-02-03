@@ -35,21 +35,21 @@
                 <span id="temporizador-icon">⏳</span>
                 <span id="temporizador">5:00</span> <!-- Este es el ID que usaremos en el JavaScript -->
             </div>
-            <a href="" target="_blank">
+            <a href="#" id="volumeLink">
                 <i class="fa-solid fa-volume-up" aria-hidden="true"></i>
             </a>
-            <a href="" target="_blankss">
+            <a href="#" id="settingsLink">
                 <i class="fa-solid fa-cog" aria-hidden="true"></i>
             </a>
         </div>
 
         <div class="card-logo">
             <div class="rectangle-superior"></div>
-                <div class="question-container text-center">
-                    <header class="text-center">
-                        <h2 id="preguntas-title">Pregunta 1</h2>
-                    </header>
-                </div>
+            <div class="question-container text-center">
+                <header class="text-center">
+                    <h2 id="preguntas-title">Pregunta 1</h2>
+                </header>
+            </div>
             <div class="rectangle-inferior"></div>
 
         </div>
@@ -96,9 +96,26 @@
     </div>
 </div>
 
+<!-- Modal de Ajustes -->
+<div id="settingsModal" class="settings-modal">
+    <div class="settings-content">
+        <span class="close-settings">&times;</span>
+        <h2>Ajustes</h2>
+        <div class="settings-option">
+            <label for="volumeControl">Volumen:</label>
+            <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
+        </div>
+        <div class="settings-option">
+            <button id="returnToStart" class="btn btn-primary">Regresar al Inicio</button>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/scriptNF.js"></script>
 <script src="js/scriptPreguntasNF.js"></script>
-<script src="js/scriptEstadisticas.js"></script> <!-- Nuevo script para manejar estadísticas -->
+<script src="js/scriptSonido.js"></script>
+<script src="js/soundAndSettings.js"></script>
+<script src="js/scriptEstadisticas.js"></script>
 </body>
 </html>
