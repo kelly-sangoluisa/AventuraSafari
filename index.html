@@ -17,12 +17,12 @@
 
     <div class="card-logo">
         <div class="rectangle-superior"></div>
-        <div class="title">Aventura Animal: El Desafío de los Reinos</div>
+        <div class="title" aria-label="Juego Aventura Animal: El Desafío de los Reinos" tabindex=0>Aventura Animal: El Desafío de los Reinos</div>
         <div class="rectangle-inferior"></div>
     </div>
 
     <div class="card-explore">
-        <div class="text-wrapper-3">EXPLORA SOBRE EL TEMA</div>
+        <div class="text-wrapper-3" aria-label="EXPLORA SOBRE el TEMA Mira el siguiente video">EXPLORA SOBRE EL TEMA</div>
         <video controls tabindex="0" aria-label="Video " id="promo-video">
             <source src="vid/Video-Informativo.mp4" type="video/mp4">
             <track src="subtitles.vtt" kind="subtitles" srclang="es" label="Español">
@@ -31,7 +31,7 @@
     </div>
 
     <div class="card-play">
-        <div class="text-wrapper-2">VAMOS A JUGAR!</div>
+        <div class="text-wrapper-2" aria-label="vamos a jugar" tabindex=0>VAMOS A JUGAR!</div>
         <a href="seleccionNivel.html">
             <i class="fa-solid fa-play play-icon" aria-hidden="true"></i>
         </a>
@@ -49,9 +49,25 @@
             <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
     </div>
-    <!-- Elemento de audio -->
-    <audio id="backgroundMusic" src="resources/audio/marimba-tropical-african.mp3" loop></audio>
-</body>
+   
 <script src="js/scriptSonido.js"></script>
+<script>
+     // Manejar el ciclo de tabulación
+     document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                var focusableElements = document.querySelectorAll('a, button, input, [tabindex="0"]');
+                var firstElement = focusableElements[0];
+                var lastElement = focusableElements[focusableElements.length - 1];
 
+                if (document.activeElement === lastElement && !e.shiftKey) {
+                    e.preventDefault();
+                    firstElement.focus();
+                } else if (document.activeElement === firstElement && e.shiftKey) {
+                    e.preventDefault();
+                    lastElement.focus();
+                }
+            }
+        });
+    </script>
+</script>
 </html>
