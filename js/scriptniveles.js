@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
         // Redirigimos a la página de niveles correspondiente
         if (selectedLevel === 'Fácil') {
-            window.location.href = 'nivelFacil.html';
+            window.location.href = 'tutorialNF.html';
         } else if (selectedLevel === 'Normal') {
             window.location.href = 'nivelMedio.html';
         } else if (selectedLevel === 'Difícil') {

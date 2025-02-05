@@ -12,7 +12,54 @@ document.addEventListener('DOMContentLoaded', function () {
     gameAudio.loop = true;
     
     // Establecer volumen inicial
-    gameAudio.volume = volumeControl.value;
+    if (volumeControl) {
+        gameAudio.volume = volumeControl.value;
+    }
+
+    // Función para actualizar el ícono según el estado
+    function updateVolumeIcon(muted) {
+        // Simplemente actualizar la clase del ícono existente
+        volumeIcon.className = muted ? 'fa-solid fa-volume-mute' : 'fa-solid fa-volume-up';
+    }
+
+    // Función para alternar el estado de silencio
+    function toggleMute() {
+        isMuted = !isMuted;
+        
+        if (isMuted) {
+            gameAudio.volume = 0;
+            if (volumeControl) volumeControl.value = 0;
+        } else {
+            gameAudio.volume = 1;
+            if (volumeControl) volumeControl.value = 1;
+        }
+        
+        updateVolumeIcon(isMuted);
+    }
+
+    // Manejar el clic en el ícono de volumen
+    volumeIcon.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleMute();
+    });
+
+    // Manejar interacción con teclado
+    volumeIcon.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleMute();
+        }
+    });
+
+    // Manejar el cambio de volumen desde el control deslizante
+    if (volumeControl) {
+        volumeControl.addEventListener('input', function() {
+            gameAudio.volume = this.value;
+            isMuted = parseFloat(this.value) === 0;
+            updateVolumeIcon(isMuted);
+        });
+    }
 
     // Mostrar el modal al cargar la página
     startGameModal.show();
@@ -29,39 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 startGameModal.hide();
             });
     });
-
-    // Manejar cambios en el control de volumen
-    volumeControl.addEventListener('input', function() {
-        gameAudio.volume = this.value;
-        
-        // Actualizar el ícono según el volumen
-        if (parseFloat(this.value) === 0) {
-            volumeIcon.innerHTML = '<i class="fa-solid fa-volume-mute" aria-hidden="true"></i>';
-            isMuted = true;
-        } else {
-            volumeIcon.innerHTML = '<i class="fa-solid fa-volume-up" aria-hidden="true"></i>';
-            isMuted = false;
-        }
-    });
-
-    // Mute/desmute al hacer clic en el ícono de volumen
-    volumeIcon.addEventListener('click', function (event) {
-        event.preventDefault();
-        isMuted = !isMuted;
-
-        if (isMuted) {
-            gameAudio.volume = 0;
-            volumeIcon.innerHTML = '<i class="fa-solid fa-volume-mute" aria-hidden="true"></i>';
-            volumeControl.value = 0;
-        } else {
-            gameAudio.volume = 1;
-            volumeIcon.innerHTML = '<i class="fa-solid fa-volume-up" aria-hidden="true"></i>';
-            volumeControl.value = 1;
-        }
-    });
 });
 
 // Exponer función para acceder al audio desde otros scripts
 function getGameAudio() {
     return gameAudio;
 }
+
