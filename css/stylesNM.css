@@ -1,0 +1,238 @@
+/* Tablero del juego */
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    position: absolute;
+    top: 32.5%;
+    left: 17%;
+}
+.card-logo .title {
+    font-family: "Bebas Neue-Regular", Helvetica;
+    font-weight: 900;
+    font-size: 20px;
+}
+.welcome-text {
+    font-size: 24px;
+    color: #FFFFFF;
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    letter-spacing:  1.2px;
+    left: 5px;
+  }
+  
+  .level-text {
+    font-size: 24px;
+    color: #FFFFFF;
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    letter-spacing: 1.2px;
+    margin-left: 50px; /* Espacio entre los textos */
+  }
+
+
+/* Celdas de la tabla */
+img,td {
+    width: 120px;
+    height: 120px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #cccccc00;
+    position: relative;
+    padding: 1px;
+}
+
+
+/* Indica que una celda está seleccionada */
+td.selected {
+    border: 3px solid #ff7b00;
+}
+
+/* Indica que una selección es correcta */
+td.correct {
+    border: 3px solid rgb(89, 241, 89);
+    filter: brightness(0.5) sepia(1) hue-rotate(90deg) saturate(5);
+    transition: filter 0.3s ease;
+}
+
+/* Indica que una selección es incorrecta */
+td.incorrect {
+    border: 3px solid rgb(226, 7, 7);
+    filter: brightness(0.5) sepia(1) hue-rotate(-50deg) saturate(5); 
+    transition: filter 0.3s ease;
+}
+
+
+/* Botón contenedor */
+.button-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    margin-top: 20px;
+    position: absolute;
+    bottom: 4%;
+    left: 0; /* Reiniciar el valor de left */
+    width: 100%; /* Asegurar que el contenedor ocupa todo el ancho */
+}
+/* Estilos para los botones */
+button {
+    background-color: #d66b09;
+    width: 200px;
+    color: #000;
+    box-shadow: 2px 2px 4px #00000066;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #123d24;
+    color: #fff;
+}
+
+button:active {
+    background-color: #003d80;
+}
+
+
+#temporizador-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    background-color: #f5f5f5;
+    color: #0b0b0b;
+    border-radius: 20px;
+    padding: 0 12px; /* Sin padding */
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente */
+    width: fit-content;
+    font-weight: bold;
+    height: 30px; /* Establecer una altura fija si es necesario */
+  }
+  
+  #temporizador-icon {
+    font-size: 0.9rem; /* Reducir el tamaño del ícono */
+  }
+  
+  #temporizador {
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente */
+  }
+  
+  #vidas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    background-color: #f5f5f5;
+    color: #0b0b0b;
+    border-radius: 20px;
+    padding: 0 12px;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente */
+    width: fit-content;
+    font-weight: bold;
+    height: 30px; /* Establecer una altura fija si es necesario */
+  }
+  
+  #vidas-remaining {
+    font-size: 0.9rem; /* Reducir el tamaño de fuente para el texto de vidas */
+  }
+
+  #game-over-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  #game-over {
+    background-color: rgb(213, 213, 213);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    width: 400px; /* Aumentar el ancho del contenedor */
+  }
+  
+  #tutorial-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  #tutorial {
+    background-color: rgb(213, 213, 213);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    width: 400px; /* Aumentar el ancho del contenedor */
+  }
+  #tutorial h2 {
+    color: #000000;
+  }
+  .game-container {
+    display: flex;
+    flex-direction: column; /* Asegúrate de que los elementos se apilen verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    margin-top: 90px; /* Espacio superior si es necesario */
+    border: 1px #4caf50;
+  
+}
+
+.progress-container {
+    width: 100%; /* Ancho completo */
+    max-width: 840px; /* Ancho máximo para que no se extienda demasiado */
+    height: 20px; /* Altura de la barra de progreso */
+    background-color: #ddd; /* Color de fondo de la barra de progreso */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 10px; /* Espacio entre la barra de progreso y la tabla */
+
+}
+
+#progress-bar {
+    height: 100%; /* Altura completa de la barra de progreso */
+    width: 0; /* Inicialmente, la barra está vacía */
+    background-color: #4caf50; /* Color de la barra de progreso */
+    border-radius: 10px; /* Bordes redondeados */
+   
+}
+  #feedback {
+    margin: 0PX;
+    font-size: 1.1em;
+    color: #ddd;
+    padding: 0PX;
+  }
+  
+  #score {
+    margin: 0PX;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #ddd;
+  }
+  .puntaje {
+    margin: 0PX;
+    position: relative;
+    top: 270px; /* Ajusta este valor según lo necesites */
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+
+}
