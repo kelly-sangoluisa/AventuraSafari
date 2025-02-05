@@ -71,8 +71,9 @@
         </div>
         <!-- Botones -->
         <div class="buttons-container text-center">
+            <button class="btn btn-danger" id="exit-level">Salir al Menú</button>
             <button class="btn btn-warning" id="skip-preguntas">Saltar Preguntas</button>
-            <button class="btn btn-success" id="next-step">Siguiente Paso</button>
+            <button class="btn btn-success" id="next-level">Siguiente Nivel</button>
         </div>
     </div>
 </div>
@@ -106,7 +107,28 @@
             <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
         </div>
         <div class="settings-option">
+            <button id="pauseButton" class="btn btn-warning">
+                <i class="fa-solid fa-pause"></i> Pausar Juego
+            </button>
+        </div>
+        <div class="settings-option">
             <button id="returnToStart" class="btn btn-primary">Regresar al Inicio</button>
+        </div>
+    </div>
+</div>
+
+<!-- Agregar este modal justo antes del cierre del body -->
+<div class="modal fade" id="startGameModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="startGameModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h4>¡Bienvenido al juego!</h4>
+                <p>Haz clic en el botón para comenzar con música</p>
+                <button type="button" class="btn btn-primary" id="startGameBtn">
+                    Comenzar Juego
+                    <i class="fa-solid fa-play ms-2"></i>
+                </button>
+            </div>
         </div>
     </div>
 </div>
