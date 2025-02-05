@@ -24,12 +24,8 @@
             <span id="temporizador-icon">⏳</span>
             <span id="temporizador">5:00</span>
           </div>
-        <a href="" target="_blank">
-            <i class="fa-solid fa-volume-up" aria-hidden="true"></i>
-        </a>
-        <a href="" target="_blank">
-            <i class="fa-solid fa-cog" aria-hidden="true"></i>
-        </a>
+          <i class="fa-solid fa-volume-up" id="volumeLink" aria-label="Control de volumen" tabindex=0></i>
+          <i class="fa-solid fa-cog" id="settingsLink" aria-label="Panel de Configuración" tabindex=0></i>
     </div>
 
     <!-- Overlay de Game Over -->
@@ -89,7 +85,8 @@
         <button id="next-button" onclick="window.location.href='nivelDificil.html'">Siguiente</button>
 
     </div>
-    <script src="js/scriptNM.js"></script>
     
 </body>
+<script src="js/scriptNM.js"></script>
+<script src="js/scriptSonido.js"></script>
 </html>
