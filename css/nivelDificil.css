@@ -256,7 +256,7 @@ h1 {
 }
 
 #game-over {
-  background-color: rgb(213, 213, 213);
+  background-color: rgb(132, 155, 194);
   padding: 20px;
   border-radius: 8px;
   text-align: center;
@@ -278,7 +278,7 @@ h1 {
 }
 
 #tutorial {
-  background-color: rgb(213, 213, 213);
+  background-color: rgb(132, 155, 194);
   padding: 20px;
   border-radius: 8px;
   text-align: center;
