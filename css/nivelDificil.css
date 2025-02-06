@@ -62,14 +62,13 @@ body {
 
 .card-logo {
   position: absolute;
-  top: 15%;
-max-height: 90px;
-  right: 15%; /* Adjusted to match card-play positioning */
+  top: 12%; /* Igual que card-play */
+  right: 25%; /* Igual que card-play */
+  width: 70%; /* Igual que card-play */
   text-align: center;
-  background-color:#0b0a0ab5;
+  background-color: #0b0a0ab5;
   font-family: Arial, sans-serif;
-  width: 70%; /* Matched to card-play width */
-  
+  max-height: 90px;
 }
 
 .card-logo .title {
@@ -83,13 +82,14 @@ max-height: 90px;
 
 .rectangle-superior,
 .rectangle-inferior {
+  position: relative;
   height: 5px;
   width: 90%;
   background-color: rgba(255, 255, 255, 0);
   border: 0.5px solid #ffffff;
   box-shadow: -2px 1px 4px #d66c0986;
   margin: 2px ;
-  left: 80px;
+  left: 100px;
 
 }
 .card-logo p {
@@ -157,10 +157,13 @@ h1 {
   font-size: 1.5em;
   color: #333;
 }
-
 #instructions {
   font-size: 1em;
   color: #f4f4f4;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente si tiene altura definida */
+  height: 100%;
 }
 
 .progress-container {
