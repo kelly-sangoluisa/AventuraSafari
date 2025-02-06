@@ -7,8 +7,6 @@ const totalMatches = 5;
 let timer = null;
 let tiempoRestante = 300;
 let juegoIniciado = false;
-let currentFocusedColumn = 'left';
-let currentFocusedIndex = 0;
 
 const progressBar = document.getElementById("progress-bar");
 
@@ -18,26 +16,26 @@ function resetSelection() {
     currentSelection = null;
 }
 
-function handleSelection(element) {
-    if (!element || element.classList.contains('matched')) return;
+function handleSelection(event) {
+    const selectedElement = event.target;
 
-    if (currentSelection && currentSelection !== element) {
-        element.classList.add("selected");
+    if (currentSelection && currentSelection !== selectedElement) {
+        selectedElement.classList.add("selected");
         const imageIndex = currentSelection.getAttribute("data-index");
-        const characteristicIndex = element.getAttribute("data-index");
+        const characteristicIndex = selectedElement.getAttribute("data-index");
 
         if (imageIndex === characteristicIndex) {
             score++;
             matches++;
             document.getElementById("feedback").textContent = "¡Correcto!";
             currentSelection.classList.add("matched");
-            element.classList.add("matched");
+            selectedElement.classList.add("matched");
             updateProgressBar();
         } else {
             vidas--;
             incorrectos++;
             document.getElementById("feedback").textContent = "Incorrecto, intenta nuevamente.";
-            document.getElementById("vidas-remaining").textContent = Vidas ❤: ${vidas};
+            document.getElementById("vidas-remaining").textContent = `Vidas ❤️: ${vidas}`;
 
             if (vidas <= 0) {
                 gameOver();
@@ -51,45 +49,54 @@ function handleSelection(element) {
             comprobarFinJuego();
         }, 1000);
     } else if (!currentSelection) {
-        element.classList.add("selected");
-        currentSelection = element;
+        selectedElement.classList.add("selected");
+        currentSelection = selectedElement;
     }
 }
+//Actualizar  Puntaje 
 
 function updateScore() {
-    document.getElementById("score").textContent = Puntaje: ${score};
+    document.getElementById("score").textContent = `Puntaje: ${score}`;
 }
 
+//barra de pogreso 
 function updateProgressBar() {
     const progress = (matches / totalMatches) * 100;
-    progressBar.style.width = ${progress}%;
+    progressBar.style.width = `${progress}%`;
 }
 
 function gameOver() {
-    const gameOverOverlay = document.getElementById('game-over-overlay');
-    gameOverOverlay.style.display = "flex";
-    gameOverOverlay.setAttribute('aria-hidden', 'false');
-    
+    document.getElementById('game-over-overlay').style.display = "flex";
     document.getElementById('score-result').textContent = "Puntaje: " + score;
     document.getElementById('vidas-result').textContent = "Vidas Restantes: " + vidas;
     document.getElementById('incorrectos-result').textContent = "Respuestas Incorrectas: " + incorrectos;
     
-    document.getElementById('game-over').focus();
+    // Add focus to the button when game over screen appears
+    const playAgainButton = document.querySelector('#game-over button');
+    playAgainButton.focus();
+
+    // Add keyboard event listener for the button
+    playAgainButton.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            window.location.href = 'nivelDificil.html';
+        }
+    });
     
     if (timer !== null) {
         clearInterval(timer);
         timer = null;
     }
 }
-
 function comprobarFinJuego() {
-    if (matches === totalMatches || vidas <= 0 || tiempoRestante <= 0) {
+    if (vidas <= 0) {
         gameOver();
     }
 }
 
 function iniciarTemporizador() {
-    if (timer !== null) return;
+    if (timer !== null) {
+        return;
+    }
 
     const temporizadorElemento = document.getElementById('temporizador');
     temporizadorElemento.innerText = formatoTiempo(tiempoRestante);
@@ -101,6 +108,7 @@ function iniciarTemporizador() {
         } else {
             clearInterval(timer);
             timer = null;
+            alert('¡Se acabó el tiempo!');
             gameOver();
         }
     }, 1000);
@@ -109,7 +117,7 @@ function iniciarTemporizador() {
 function formatoTiempo(segundos) {
     const minutos = Math.floor(segundos / 60);
     const segundosRestantes = segundos % 60;
-    return ${minutos.toString().padStart(2, '0')}:${segundosRestantes.toString().padStart(2, '0')};
+    return `${minutos.toString().padStart(2, '0')}:${segundosRestantes.toString().padStart(2, '0')}`;
 }
 
 function cerrarTutorial() {
@@ -122,75 +130,11 @@ function cerrarTutorial() {
     }
 }
 
-function handleKeyboardNavigation(event) {
-    const gameOverOverlay = document.getElementById('game-over-overlay');
-    const tutorialOverlay = document.getElementById('tutorial-overlay');
-    
-    if (gameOverOverlay.style.display === "flex") {
-        if (event.key === "Enter") {
-            window.location.href = 'nivelDificil.html';
-        }
-        return;
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        cerrarTutorial();
     }
-
-    if (tutorialOverlay.style.display !== 'none') {
-        if (event.key === "Enter") {
-            cerrarTutorial();
-            return;
-        }
-    }
-
-    const leftColumn = Array.from(document.querySelectorAll("#grupoanimal-list .item:not(.matched)"));
-    const rightColumn = Array.from(document.querySelectorAll("#characteristics-list .item:not(.matched)"));
-    
-    let currentColumn = currentFocusedColumn === 'left' ? leftColumn : rightColumn;
-    
-    switch(event.key) {
-        case "ArrowUp":
-            event.preventDefault();
-            if (currentFocusedIndex > 0) {
-                currentFocusedIndex--;
-                currentColumn[currentFocusedIndex]?.focus();
-            }
-            break;
-        case "ArrowDown":
-            event.preventDefault();
-            if (currentFocusedIndex < currentColumn.length - 1) {
-                currentFocusedIndex++;
-                currentColumn[currentFocusedIndex]?.focus();
-            }
-            break;
-        case "ArrowLeft":
-            event.preventDefault();
-            if (currentFocusedColumn === 'right') {
-                currentFocusedColumn = 'left';
-                currentFocusedIndex = Math.min(currentFocusedIndex, leftColumn.length - 1);
-                leftColumn[currentFocusedIndex]?.focus();
-            }
-            break;
-        case "ArrowRight":
-            event.preventDefault();
-            if (currentFocusedColumn === 'left') {
-                currentFocusedColumn = 'right';
-                currentFocusedIndex = Math.min(currentFocusedIndex, rightColumn.length - 1);
-                rightColumn[currentFocusedIndex]?.focus();
-            }
-            break;
-        case "Enter":
-            event.preventDefault();
-            if (currentColumn[currentFocusedIndex]) {
-                handleSelection(currentColumn[currentFocusedIndex]);
-            }
-            break;
-        case "Tab":
-            event.preventDefault();
-            currentFocusedColumn = currentFocusedColumn === 'left' ? 'right' : 'left';
-            const newColumn = currentFocusedColumn === 'left' ? leftColumn : rightColumn;
-            currentFocusedIndex = Math.min(currentFocusedIndex, newColumn.length - 1);
-            newColumn[currentFocusedIndex]?.focus();
-            break;
-    }
-}
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const temporizadorElemento = document.getElementById('temporizador');
@@ -200,28 +144,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedLevel = localStorage.getItem('selectedLevel');
 
     if (playerName && selectedLevel) {
-        document.getElementById('welcome-text').textContent = Bienvenido, ${playerName}!;
-        document.getElementById('level-text').textContent = Nivel: ${selectedLevel};
+        document.getElementById('welcome-text').textContent = `Bienvenido, ${playerName}!`;
+        document.getElementById('level-text').textContent = `Nivel: ${selectedLevel}`;
     } else {
         alert("Datos no válidos. Por favor, comienza de nuevo.");
         window.location.href = 'nivelDificil.html';
     }
 
-    const items = document.querySelectorAll(".item");
-    items.forEach((item, index) => {
-        item.setAttribute('tabindex', '0');
-        item.addEventListener("click", () => handleSelection(item));
-        item.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                handleSelection(item);
-            }
-        });
+    // Event listeners para los items del juego
+    document.querySelectorAll(".item").forEach(item => {
+        item.addEventListener("click", handleSelection);
     });
 
-    document.addEventListener("keydown", handleKeyboardNavigation);
+    // Event listeners para cerrar el tutorial
     document.getElementById('close-instructions').addEventListener('click', cerrarTutorial);
     document.getElementById('close-icon').addEventListener('click', cerrarTutorial);
 
+    // Mini tutorial de juego
     const pointer = document.getElementById('pointer');
     const animal = document.getElementById('animal');
     const species = document.getElementById('species');
@@ -251,4 +190,137 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     animateSelection();
+});
+
+// Add these variables to your existing globals
+let currentFocusedGroup = 'grupoanimal'; // Track which group (animals or characteristics) is focused
+let currentFocusIndex = 0; // Track index within current group
+
+function handleKeyboardNavigation(event) {
+    const grupoanimalItems = Array.from(document.querySelectorAll('.grupoanimales .item'));
+    const characteristicItems = Array.from(document.querySelectorAll('.characteristics .item'));
+    
+    switch(event.key) {
+        case 'Tab':
+            event.preventDefault();
+            // Toggle between animal and characteristic groups
+            currentFocusedGroup = currentFocusedGroup === 'grupoanimal' ? 'characteristic' : 'grupoanimal';
+            break;
+            
+        case 'ArrowUp':
+            event.preventDefault();
+            if (currentFocusIndex > 0) {
+                currentFocusIndex--;
+            }
+            break;
+            
+        case 'ArrowDown':
+            event.preventDefault();
+            const maxIndex = currentFocusedGroup === 'grupoanimal' ? 
+                grupoanimalItems.length - 1 : 
+                characteristicItems.length - 1;
+            if (currentFocusIndex < maxIndex) {
+                currentFocusIndex++;
+            }
+            break;
+            
+        case 'Enter':
+            event.preventDefault();
+            const currentItems = currentFocusedGroup === 'grupoanimal' ? 
+                grupoanimalItems : 
+                characteristicItems;
+            
+            const selectedElement = currentItems[currentFocusIndex];
+            if (selectedElement) {
+                handleKeyboardSelection(selectedElement);
+            }
+            break;
+    }
+    
+    // Update visual focus
+    updateFocus(grupoanimalItems, characteristicItems);
+}
+
+function updateFocus(grupoanimalItems, characteristicItems) {
+    // Remove focus from all items
+    document.querySelectorAll('.item').forEach(item => {
+        item.classList.remove('keyboard-focus');
+    });
+    
+    // Add focus to current item
+    const currentItems = currentFocusedGroup === 'grupoanimal' ? 
+        grupoanimalItems : 
+        characteristicItems;
+    
+    if (currentItems[currentFocusIndex]) {
+        currentItems[currentFocusIndex].classList.add('keyboard-focus');
+        currentItems[currentFocusIndex].focus();
+    }
+}
+
+function handleKeyboardMatch(event) {
+    if (event.key === 'Enter') {
+        const element = document.activeElement;
+        if (element.classList.contains('item')) {
+            const event = { target: element };
+            handleSelection(event);
+        }
+    } else if (['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+        event.preventDefault();
+        const grupoanimalItems = Array.from(document.querySelectorAll('.grupoanimales .item'));
+        const characteristicItems = Array.from(document.querySelectorAll('.characteristics .item'));
+        const currentElement = document.activeElement;
+        
+        if (!currentElement.classList.contains('item')) return;
+        
+        const isInGrupoAnimales = grupoanimalItems.includes(currentElement);
+        const currentList = isInGrupoAnimales ? grupoanimalItems : characteristicItems;
+        const otherList = isInGrupoAnimales ? characteristicItems : grupoanimalItems;
+        const currentIndex = currentList.indexOf(currentElement);
+        
+        let nextElement;
+        
+        switch(event.key) {
+            case 'ArrowRight':
+                if (isInGrupoAnimales) {
+                    nextElement = characteristicItems[currentIndex] || characteristicItems[0];
+                } else {
+                    nextElement = characteristicItems[(currentIndex + 1) % characteristicItems.length];
+                }
+                break;
+                
+            case 'ArrowLeft':
+                if (!isInGrupoAnimales) {
+                    nextElement = grupoanimalItems[currentIndex] || grupoanimalItems[0];
+                } else {
+                    nextElement = grupoanimalItems[(currentIndex - 1 + grupoanimalItems.length) % grupoanimalItems.length];
+                }
+                break;
+                
+            case 'ArrowDown':
+                nextElement = currentList[(currentIndex + 1) % currentList.length];
+                break;
+                
+            case 'ArrowUp':
+                nextElement = currentList[(currentIndex - 1 + currentList.length) % currentList.length];
+                break;
+        }
+        
+        if (nextElement) {
+            nextElement.focus();
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('keydown', handleKeyboardMatch);
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        .item:focus {
+            outline: 3px solid #007bff;
+            box-shadow: 0 0 5px rgba(0,123,255,0.5);
+        }
+    `;
+    document.head.appendChild(style);
 });

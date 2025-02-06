@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <title>Juego Educativo - Nivel Dificil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/styleguide.css" />
@@ -10,133 +12,96 @@
 </head>
 
 <body>
-    <!-- Fondo difuminado con el nombre del jugador -->
     <div class="fondo-difuminado">
-        <div id="text-container" class="text-container">
-            <div id="welcome-text" class="welcome-text"></div>
-            <div id="level-text" class="level-text"></div>
-        </div>
-        
-        
+        <div id="text-container" class="text-container" tabindex="0">
+            <div id="welcome-text" class="welcome-text" tabindex="0">
+                Bienvenido, <span id="player-name" tabindex="0">Nombre del Jugador</span>
+            </div>
+            <div id="level-text" class="level-text" tabindex="0">
     </div>
 
     <div class="group-config">
-       
-        <div id="vidas">
+        <div id="vidas" tabindex="0">
             <p id="vidas-remaining">Vidas ❤️: 3</p>
         </div>
-        <div id="temporizador-container">
-           
+        <div id="temporizador-container" tabindex="0">
             <span id="temporizador-icon" aria-label="Temporizador">⏳</span>
-            <span id="temporizador">5:00</span>
-          </div>
-          
-          <i class="fa-solid fa-volume-up" id="volumeLink" aria-label="Control de volumen del juego" tabindex="0"></i>
-          <i class="fa-solid fa-cog" id="settingsLink" aria-label="Configuración del juego" tabindex="0"></i>         
-    </div>
-   
-<!-- Overlay de Game Over -->
-<div id="game-over-overlay" style="display: none;">
-    <div id="game-over">
-        <h1>¡Juego Terminado!</h1>
-        <p id="score-result">Puntaje: </p>
-        <p id="vidas-result">Vidas Restantes: </p>
-        <p id="incorrectos-result">Respuestas Incorrectas: </p>
-        <button onclick="window.location.href='nivelDificil.html'">Volver a jugar</button>
-    </div>
-</div>
-
-<!-- Overlay de Tutorial -->
-<div id="tutorial-overlay">
-    <div id="tutorial">
-        <h2>Instrucciones de Juego</h2>
-        <p>Empareja cada grupo de animales con su respectiva característica</p>
-        <p>Observa el ejemplo Ejemplo</p>
-        <div id="animal-container">
-            <div class="animal" id="animal">🐶 Perro</div>
-            <div class="species" id="species">🐾 Mamífero</div>
+            <span id="temporizador" aria-live="Tiempo">5:00</span>
         </div>
-        <div id="pointer">👆</div>
-        <button id="close-instructions">Cerrar</button>
-        <i class="fas fa-times" id="close-icon" aria-hidden="true" style="cursor: pointer; font-size: 24px; position: absolute; top: 10px; right: 10px;"></i> <!-- Ícono para cerrar -->
+
+        <a href="#" target="_blank" aria-label="Ajustes de sonido" tabindex="0">
+            <i class="fa-solid fa-volume-up" aria-hidden="true"></i>
+        </a>
+        <a href="#" target="_blank" aria-label="Configuración" tabindex="0">
+            <i class="fa-solid fa-cog" aria-hidden="true"></i>
+        </a>
     </div>
-</div>
+
+    <!-- Overlay de Game Over -->
+    <div id="game-over-overlay" style="display: none;" role="dialog" aria-labelledby="game-over" aria-hidden="true">
+        <div id="game-over">
+            <h1 id="game-over" tabindex="0">¡Juego Terminado!</h1>
+            <p id="score-result" tabindex="0">Puntaje: </p>
+            <p id="vidas-result" tabindex="0">Vidas Restantes: </p>
+            <p id="incorrectos-result" tabindex="0">Respuestas Incorrectas: </p>
+            <button aria-label="Volver a jugar" tabindex="0">Volver a jugar</button>
+        </div>
+    </div>
+
+    <!-- Overlay de Tutorial -->
+    <div id="tutorial-overlay" role="dialog" aria-labelledby="tutorial" aria-hidden="true">
+        <div id="tutorial">
+            <h2 id="tutorial" tabindex="0">Instrucciones de Juego</h2>
+            <p tabindex="0">Empareja cada grupo de animales con su respectiva característica</p>
+            <p>Observa el ejemplo Ejemplo</p>
+            <div id="animal-container" role="list">
+                <div class="animal" id="animal" role="listitem" tabindex="0">🐶 Perro</div>
+                <div class="species" id="species" role="listitem" tabindex="0">🐾 Mamífero</div>
+            </div>
+            <div id="pointer" aria-label="Apuntar" tabindex="0">👆</div>
+            <button id="close-instructions" aria-label="Cerrar instrucciones" tabindex="0">Cerrar</button>
+            <i class="fas fa-times" id="close-icon" aria-hidden="true" style="cursor: pointer; font-size: 24px; position: absolute; top: 10px; right: 10px;" role="button" tabindex="0"></i>
+        </div>
+    </div>
 
     <div class="card-logo">
         <div class="rectangle-superior"></div>
-        <div class="title">Instrucciones de juego</div>
-        <p>Une  cada grupo de animales con sus  caracteristicas correspondientes</p>
+        <div class="title" tabindex="0">Instrucciones de juego</div>
+        <p tabindex="0">Une cada grupo de animales con sus características correspondientes</p>
         <div class="rectangle-inferior"></div>
     </div>
 
     <div class="card-play">
         <div class="progress-container">
-            <div id="progress-bar"></div>
+            <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"></div>
         </div>
 
         <div class="game-board">
             <!-- Sección de imágenes -->
-            <div class="grupoanimales" id="grupoanimal-list">
-                <div class="item" data-type="grupoanimal" data-index="0" tabindex="0">
-                      <!--  <img src="" alt="Mariposa">  -->
-                    Cnidarios
-                </div>
-                <div class="item" data-type="grupoanimal" data-index="1">
-                     <!--  <img src="" alt="Mariposa">  -->
-                        Moluscos
-                </div>
-                <div class="item" data-type="grupoanimal" data-index="2">
-                          <!--  <img src="" alt="Mariposa">  -->
-                            Equinodermos
-                </div>
-                <div class="item" data-type="grupoanimal" data-index="3">
-                          <!--  <img src="" alt="Mariposa">  -->
-                            Mamiferos
-                </div>
-                <div class="item" data-type="grupoanimal" data-index="4">
-                        <!--  <img src="" alt="Mariposa">  -->
-                        Anélidos
-              </div>
+            <div class="grupoanimales" id="grupoanimal-list" role="list">
+                <div class="item" data-type="grupoanimal" data-index="0" role="listitem" tabindex="0">Cnidarios</div>
+                <div class="item" data-type="grupoanimal" data-index="1" role="listitem" tabindex="0">Moluscos</div>
+                <div class="item" data-type="grupoanimal" data-index="2" role="listitem" tabindex="0">Equinodermos</div>
+                <div class="item" data-type="grupoanimal" data-index="3" role="listitem" tabindex="0">Mamíferos</div>
+                <div class="item" data-type="grupoanimal" data-index="4" role="listitem" tabindex="0">Anélidos</div>
             </div>
 
             <!-- Sección de características -->
-            <div class="characteristics" id="characteristics-list">
-                <div class="item" data-type="characteristic" data-index="3">
-                    Poseen un esqueleto interno calcáreo, como las estrellas de mar.
-                </div>
-                <div class="item" data-type="characteristic" data-index="1">
-                    Tienen un cuerpo segmentado, como las lombrices de tierra.
-                </div>
-                <div class="item" data-type="characteristic" data-index="0">
-                    Carecen de esqueleto interno y tienen un cuerpo blando protegido por una concha.
-                </div>
-                <div class="item" data-type="characteristic" data-index="4">
-                    Vertebrados con pelo o pelaje que alimentan a sus crías con leche.
-                </div>
-                <div class="item" data-type="characteristic" data-index="2">
-                    Incluyen medusas y corales, y tienen tentáculos con células urticantes.
-                </div>
-   </div>
-  
-    </div>
-    <div>
-        <p id="feedback"></p>
-        <p id="score">Puntaje: 0</p>
-    </div>
-  </div>
-    <div class="grupo-redes">
-        <a href="https://github.com/tu-usuario" target="_blank" aria-label="Visitar perfil de GitHub">
-            <i class="fab fa-github" aria-hidden="true"></i>
-        </a>
-        <a href="https://instagram.com/tu-usuario" target="_blank" aria-label="Visitar perfil de Instagram">
-            <i class="fab fa-instagram" aria-hidden="true"></i>
-        </a>
-        <a href="https://linkedin.com/in/tu-usuario" target="_blank" aria-label="Visitar perfil de LinkedIn">
-            <i class="fab fa-linkedin" aria-hidden="true"></i>
-        </a>
+            <div class="characteristics" id="characteristics-list" role="list">
+                <div class="item" data-type="characteristic" data-index="3" role="listitem" tabindex="0">Poseen un esqueleto interno calcáreo, como las estrellas de mar.</div>
+                <div class="item" data-type="characteristic" data-index="1" role="listitem" tabindex="0">Tienen un cuerpo segmentado, como las lombrices de tierra.</div>
+                <div class="item" data-type="characteristic" data-index="0" role="listitem" tabindex="0">Carecen de esqueleto interno y tienen un cuerpo blando protegido por una concha.</div>
+                <div class="item" data-type="characteristic" data-index="4" role="listitem" tabindex="0">Vertebrados con pelo o pelaje que alimentan a sus crías con leche.</div>
+                <div class="item" data-type="characteristic" data-index="2" role="listitem" tabindex="0">Incluyen medusas y corales, y tienen tentáculos con células urticantes.</div>
+            </div>
+        </div>
+        <div>
+            <p id="feedback" tabindex="0"></p>
+            <p id="score" tabindex="0">Puntaje: 0</p>
+        </div>
     </div>
 
+    <script src="js/nivelDificil.js"></script>
 </body>
-<script src="js/nivelDificil.js"></script>
-<script src="js/scriptSonido.js"></script>
+
 </html>
